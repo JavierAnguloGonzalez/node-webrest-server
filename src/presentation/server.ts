@@ -29,21 +29,26 @@ export class Server{
 
     
      //*middlewares
+
+     this.app.use(express.json()); //raw json
+     this.app.use(express.urlencoded({extended: true}));   // x-www-form-urlencoded
     
     //* public folder
     this.app.use(express.static(this.publicPath));
 
     //*Routes
-    this.app.get('/api/todos', (req, res)=>{
 
-        res.json([
-            {id: 1, text: 'compra mileche', createdAt: new Date()},
-            {id: 2, text: 'compra platanos', createdAt: null},
-            {id: 3, text: 'compra vaselina', createdAt: new Date()},
-        ]);
+    this.app.use(this.routes);
+    // this.app.get('/api/todos', (req, res)=>{
+
+    //     res.json([
+    //         {id: 1, text: 'compra milechessssss', createdAt: new Date()},
+    //         {id: 2, text: 'compra platanos', createdAt: null},
+    //         {id: 3, text: 'compra vaselina', createdAt: new Date()},
+    //     ]);
 
 
-    })
+    // })
 
 
 
@@ -54,7 +59,7 @@ export class Server{
     })
 
         this.app.listen(this.port, () => {
-            console.log('Server is running on port');
+            console.log('Server is running on port 3000');
         }
         );
     }
