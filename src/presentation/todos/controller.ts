@@ -41,37 +41,37 @@ public createTodo = (req: Request, res: Response) => {
 }
 
 
-public updateTodo = (req: Request, res: Response) => {
+public updateTodo = ( req: Request, res: Response ) => {
     const id = +req.params.id;
-    if ( isNaN(id))  return res.status(400).json({error: 'Id argument is not a number'});
-
-    const todo =  todos.find(todo => todo.id === id);
-    if (!todo)  return res.status(404).json({error: `Todo with id ${ id } found`});
+    if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
+    
+    const todo = todos.find( todo => todo.id === id );
+    if ( !todo ) return res.status( 404 ).json( { error: `Todo with id ${ id } not found` } );
 
     const { text, completedAt } = req.body;
-
+    
     todo.text = text || todo.text;
-    (completedAt === 'null')
-        ? todo.completedAt = null
-        : todo.completedAt = new Date(completedAt || todo.completedAt);
+    ( completedAt === 'null' )
+      ? todo.completedAt = null
+      : todo.completedAt = new Date( completedAt || todo.completedAt );
+    
+
+    res.json( todo );
+
+  }
 
 
-    //! ojo referecia
-   res.json(todo);
-}
-
-
-public deleteTodo = (req: Request, res: Response) => {
+  public deleteTodo = (req:Request, res: Response) => {
     const id = +req.params.id;
 
-    const todo =  todos.find(todo => todo.id === id);
-    if (!todo)  res.status(404).json({error: `Todo with id ${ id } found`});
+    const todo = todos.find(todo => todo.id === id );
+    if ( !todo ) return res.status(404).json({ error: `Todo with id ${ id } not found` });
 
+    todos.splice( todos.indexOf(todo), 1 );
+    res.json( todo );
 
-    todos.splice( todos.indexOf(todo),  1);
-    res.json(todo);
-}
-
+  }
+  
 
 }
 
