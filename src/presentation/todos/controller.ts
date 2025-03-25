@@ -1,4 +1,4 @@
-import { prisma } from '../../data/postgres/index'; // Ensure the file exists at this path or update the path to the correct location
+import { prisma } from '../../data/postgres'; // Ensure the file exists at this path or update the path to the correct location
 import { Request, Response } from 'express';
 import { CreateTodoDto, UpdateTodoDto } from '../../domain/dtos';
   
